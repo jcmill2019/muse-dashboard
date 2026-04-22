@@ -1,8 +1,8 @@
 # Muse Dashboard
 
-Tableau de bord Next.js connecté au dossier local **Signal.net**.
+Tableau de bord Next.js connecté au dossier local **Signial.net**.
 
-## Connexion au dossier Signal.net
+## Connexion au dossier Signial.net
 
 Le chemin du dossier est configuré dans deux endroits :
 
@@ -15,9 +15,9 @@ Le chemin du dossier est configuré dans deux endroits :
    ```json
    {
      "signalFolder": {
-       "name": "Signal.net",
+       "name": "Signial.net",
        "path": "/Users/jcm64/Documents/...",
-       "description": "Dossier principal Signal.net"
+       "description": "Dossier principal Signial.net"
      }
    }
    ```
@@ -38,7 +38,7 @@ src/
   app/
     page.tsx              # Interface principale du dashboard
     api/
-      files/route.ts      # Liste les fichiers du dossier Signal.net
+      files/route.ts      # Liste les fichiers du dossier Signial.net
       folder-info/route.ts # Vérifie la connexion au dossier
 signal.config.json        # Configuration du dossier
 .env.local                # Chemin local (à créer, non versionné)

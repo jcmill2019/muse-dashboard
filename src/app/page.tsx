@@ -101,7 +101,7 @@ export default function Home() {
               Muse Dashboard
             </h1>
             <p style={{ fontSize: 13, color: '#888', marginTop: 2 }}>
-              Connecté à votre dossier Signal.net
+              Connecté à votre dossier Signial.net
             </p>
           </div>
         </div>
