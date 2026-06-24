@@ -62,6 +62,8 @@ async function createClient(payload: CreateClientPayload): Promise<CreateClientS
 }
 
 async function main() {
+  // Test du flux WhatsApp : user_mobile devient le canal d'envoi du lien.
+  // Le numéro doit être au format international E.164 (+33...).
   const result = await createClient({
     user_email: "jean.dupont+test@example.com",
     first_name: "Jean",
@@ -70,7 +72,7 @@ async function main() {
     postcode: "75001",
     user_mobile: "+33612345678",
     sponsor_code: "AGENT001",
-    verification_method: "email",
+    verification_method: "whatsapp",
   });
   console.log("\nSuccès :", result);
 }

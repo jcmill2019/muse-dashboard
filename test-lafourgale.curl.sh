@@ -19,5 +19,5 @@ curl -sS -i -X POST "$URL" \
     "postcode": "75001",
     "user_mobile": "+33612345678",
     "sponsor_code": "AGENT001",
-    "verification_method": "email"
+    "verification_method": "whatsapp"
   }'
