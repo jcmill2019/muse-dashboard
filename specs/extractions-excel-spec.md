@@ -120,7 +120,23 @@ Bouton **« Générer l'extraction »** → génération asynchrone si > 5 000 l
    ne pas le diffuser hors de l'entreprise »).
 4. Purge automatique des fichiers générés (cf. §5).
 
-## 7. Critères d'acceptation
+## 7. Constats complémentaires (audit RGPD du 15/07/2026)
+
+- L'export RGPD natif (Outils → Exporter les données personnelles) d'un client
+  confirme : aucune donnée IP/géolocalisation/optin déclarée. Groupes présents :
+  Compte, WooCommerce, E-mails (plugin Email Log v1.16.0).
+- **Source « Envoyé » pour l'export** : le plugin Email Log trace chaque envoi
+  (timestamp, destinataire, sujet, erreur). À utiliser comme source de la
+  colonne « Envoyé » — MAIS son champ `error` ne reflète pas les rejets SMTP
+  en aval (un envoi refusé par le relais peut apparaître `error: None`).
+  Croiser avec l'Email Log Search de Google Workspace pour le statut réel.
+- **Non-conformité RGPD à corriger** : le plugin EWD-SPP n'enregistre pas
+  d'exporter/eraser RGPD WordPress — ses données (code sponsor, date de
+  naissance, abonnement, événements de suivi) n'apparaissent pas dans les
+  exports « droit d'accès ». Ajouter `wp_privacy_personal_data_exporters`
+  + eraser au plugin.
+
+## 8. Critères d'acceptation
 
 - [ ] Un manager peut générer une extraction bornée du 01/07 au 13/07 pour
       une équipe donnée et obtenir un .xlsx conforme au §3.
