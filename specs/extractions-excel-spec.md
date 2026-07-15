@@ -127,6 +127,31 @@ Bouton **« Générer l'extraction »** → génération asynchrone si > 5 000 l
    ne pas le diffuser hors de l'entreprise »).
 4. Purge automatique des fichiers générés (cf. §5).
 
+## 6bis. Mapping des colonnes vers les clés `wp_usermeta` (audit du 15/07/2026)
+
+Relevé réel des clés meta d'un dossier client (user 17246) — l'export
+s'appuiera directement dessus :
+
+| Colonne export | Clé usermeta |
+|---|---|
+| Créé le | `spp_registration_timestamp` |
+| Agent créateur | `_lafg_created_by` |
+| Envoyé + horodatage | `_lafg_send_ok`, `_lafg_sent_at` |
+| Ouvertures email (1re, dernière, total) | `_lafg_email_opened_at`, `_lafg_email_opened_last`, `_lafg_email_opens` |
+| Statut qualifié | `_lafg_qualif`, `_lafg_qualif_level` |
+| Qualifié le / par | `_lafg_qualif_at`, `_lafg_qualif_by` |
+| Downgrade le / par | `_lafg_downgraded_at`, `_lafg_downgraded_by` (clé upgrade équivalente à vérifier) |
+| Statut produit / budget | `_lafg_offer`, `user_budget`, `spp_budget_history`, `spp_client_product_entries` |
+| Validations | `spp_validation_requests` |
+| Référence client | `reference_client` |
+| Coordonnées | `billing_*`, `shipping_*`, `user_phone`, `birth_date`, `sponsor_code` |
+| Rattachements | `ewd_spp_assigned_agent_id` (+ manager/directeur via rôles) |
+
+Confirmé absent de ce relevé : toute clé IP / géolocalisation / optin.
+Certaines clés n'existent que si l'événement a eu lieu (pattern
+« clé posée au clic ») — le développeur vérifiera sur un dossier validé
+les clés d'optin/validation/upgrade exactes.
+
 ## 7. Constats complémentaires (audit RGPD du 15/07/2026)
 
 - L'export RGPD natif (Outils → Exporter les données personnelles) d'un client
