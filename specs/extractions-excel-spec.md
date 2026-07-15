@@ -5,9 +5,16 @@ des données de production, filtrées par période, équipe, agent et statut.
 
 ## 1. Emplacement & accès
 
-- Nouvel onglet **« Extractions »** dans le tableau de bord *Vos Productions*.
-- Accès restreint : **managers et administrateurs uniquement** (les données
-  exportées contiennent des coordonnées clients complètes + IP → RGPD).
+- **Emplacement précis** : dans l'application front **lp-saisie**
+  (`https://lafourgale.club/lp-saisie/`), onglet **« Tableau de bord »** —
+  y ajouter un bouton/section **« Extractions »** ouvrant le panneau de
+  sélecteurs (§2). Ce n'est PAS une page wp-admin : les utilisateurs
+  concernés travaillent dans lp-saisie.
+- Accès restreint : **administrateurs et directeurs de production uniquement**
+  (rôles WordPress `administrator` et « Directeur production » — vérifier le
+  slug exact du rôle). Les agents, coachs et managers ne voient pas le bouton.
+  (Les données exportées contiennent des coordonnées clients complètes + IP
+  → RGPD.)
 - Chaque export est **journalisé** : qui a exporté, quand, avec quels filtres
   (table `export_log`).
 
@@ -143,5 +150,9 @@ Bouton **« Générer l'extraction »** → génération asynchrone si > 5 000 l
 - [ ] Les filtres se combinent (ET logique) ; « tous » par défaut.
 - [ ] Les timestamps sont en heure de Paris ; les colonnes IP/localisation
       sont remplies pour tout nouveau dossier créé après la mise en production.
-- [ ] Un agent simple ne voit pas l'onglet Extractions.
+- [ ] Le bouton « Extractions » apparaît dans l'onglet Tableau de bord de
+      lp-saisie pour un administrateur et un directeur de production.
+- [ ] Un agent, un coach ou un manager connecté à lp-saisie ne voit PAS le
+      bouton Extractions (ni ne peut appeler l'endpoint d'export directement —
+      contrôle du rôle côté serveur, pas seulement masquage UI).
 - [ ] Chaque export apparaît dans le journal avec auteur + filtres.
