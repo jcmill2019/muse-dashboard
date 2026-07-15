@@ -147,10 +147,21 @@ s'appuiera directement dessus :
 | Coordonnées | `billing_*`, `shipping_*`, `user_phone`, `birth_date`, `sponsor_code` |
 | Rattachements | `ewd_spp_assigned_agent_id` (+ manager/directeur via rôles) |
 
-Confirmé absent de ce relevé : toute clé IP / géolocalisation / optin.
-Certaines clés n'existent que si l'événement a eu lieu (pattern
-« clé posée au clic ») — le développeur vérifiera sur un dossier validé
-les clés d'optin/validation/upgrade exactes.
+**Correctif (audit lp-saisie du 15/07/2026)** : la console lp-saisie affiche
+bien `pays · ville + IP + horodatage` pour les clients ayant cliqué
+(validation/optin/baro). L'IP + géolocalisation du client EST donc capturée
+**au moment du clic client** et stockée en base (clés posées à l'événement —
+absentes des deux fiches auditées car ces clients n'avaient jamais cliqué).
+Le développeur relèvera les noms exacts des clés sur un dossier validé.
+
+Conséquences pour l'export :
+- Colonnes « IP / localisation / horodatage optin-validation » :
+  **exportables, historique compris** (vides uniquement pour les clients
+  n'ayant jamais cliqué).
+- Colonne « IP à la création » : à la création, seul l'agent est en ligne —
+  cette IP serait celle de l'agent/du centre d'appel. Trancher : soit
+  capturer l'IP agent à la création (audit interne), soit renommer la
+  colonne « IP client au 1er clic » (donnée déjà disponible).
 
 ## 7. Constats complémentaires (audit RGPD du 15/07/2026)
 
