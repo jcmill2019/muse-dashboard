@@ -45,11 +45,26 @@ Bouton **« Générer l'extraction »** → génération asynchrone si > 5 000 l
 | Optin : IP | IP publique du client au moment de l'optin |
 | Optin : localisation | ville + pays (géolocalisation IP) |
 
-> ⚠️ Prérequis technique : si l'IP et la géolocalisation ne sont pas déjà
-> **enregistrées au moment des événements** (création + optin), il faut
-> commencer par les capturer et les stocker. On ne peut pas exporter
-> rétroactivement une donnée jamais collectée. Pour l'historique existant,
-> les colonnes seront vides — à indiquer « n/d ».
+> ⚠️ Prérequis technique — **audit réalisé le 13/07/2026** sur une fiche
+> client fraîche (user-edit.php, plugin EWD-SPP) :
+>
+> **Déjà stocké et affiché** : timestamp d'inscription, agent/manager/directeur
+> rattachés, code sponsor, date de naissance, budget/abonnement (Fourgale /
+> Cigale + montant), coordonnées de facturation WooCommerce (ville, CP,
+> téléphone, email). Les pastilles de suivi (Envoyé, Reçu, Validation, clics
+> Club/Shop/Baro, Ok Optin) sont affichées dans la console agents — leurs
+> événements/timestamps existent donc en base.
+>
+> **ABSENT de la fiche (non capturé ou non affiché)** : IP à la création,
+> géolocalisation à la création, IP à l'optin, géolocalisation à l'optin.
+> Aucun champ `ip`/`geo`/`optin`/`consent`/`lafg_*` rendu sur le profil.
+>
+> **Conséquence** : le développement doit commencer par ajouter la capture
+> IP + géolocalisation (résolution GeoIP côté serveur) aux deux événements
+> (création du dossier, clic optin), stockée en usermeta ou table dédiée.
+> Vérifier au préalable dans `wp_usermeta` / les tables du plugin si ces
+> données existent déjà sans être affichées. Pour l'historique antérieur à
+> la mise en production de la capture : colonnes à « n/d ».
 
 ### 3.3 Statuts & suivi (pastilles)
 | Colonne | Valeurs |
