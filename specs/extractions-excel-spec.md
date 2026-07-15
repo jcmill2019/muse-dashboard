@@ -39,8 +39,10 @@ Bouton **« Générer l'extraction »** → génération asynchrone si > 5 000 l
 |---|---|
 | ID dossier | interne |
 | Créé le (timestamp) | date/heure de création du dossier, TZ Europe/Paris |
-| IP client à la création | IP publique du client au moment de l'envoi initial |
-| Localisation à la création | ville + pays (géolocalisation IP) |
+| IP émetteur (agent) | IP publique de l'AGENT au moment de la création/envoi — **capture à développer** |
+| Localisation émetteur | ville + pays de l'IP agent (géolocalisation) — capture à développer |
+| IP client au 1er clic | IP publique du client à son premier clic (validation/optin/baro) — **déjà capturée** |
+| Localisation client au 1er clic | ville + pays — déjà capturée |
 | Agent (créé par) | login/nom de l'agent |
 | Manager | manager de l'agent au moment de la création |
 | Équipe | équipe de l'agent |
@@ -158,10 +160,14 @@ Conséquences pour l'export :
 - Colonnes « IP / localisation / horodatage optin-validation » :
   **exportables, historique compris** (vides uniquement pour les clients
   n'ayant jamais cliqué).
-- Colonne « IP à la création » : à la création, seul l'agent est en ligne —
-  cette IP serait celle de l'agent/du centre d'appel. Trancher : soit
-  capturer l'IP agent à la création (audit interne), soit renommer la
-  colonne « IP client au 1er clic » (donnée déjà disponible).
+- **Décision produit (15/07/2026) : les DEUX colonnes sont retenues** :
+  1. « IP émetteur » = IP de l'agent au moment de la création du dossier
+     (+ géolocalisation). Capture à développer : enregistrer
+     `$_SERVER['REMOTE_ADDR']` (derrière proxy : `X-Forwarded-For`) côté
+     serveur lors du POST de création dans lp-saisie, en usermeta
+     (ex. `_lafg_created_ip`, `_lafg_created_geo`). Historique : « n/d ».
+  2. « IP client au 1er clic » = déjà capturée (validation/optin/baro),
+     exportable historique compris.
 
 ## 7. Constats complémentaires (audit RGPD du 15/07/2026)
 
