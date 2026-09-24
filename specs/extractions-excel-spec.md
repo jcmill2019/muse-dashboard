@@ -3,6 +3,29 @@
 Objectif : permettre aux managers de commander des extractions Excel de l'ensemble
 des données de production, filtrées par période, équipe, agent et statut.
 
+## 0. Gouvernance (consigne JC du 24/09/2026)
+
+Cette fonctionnalité est une évolution d'**Optall** (/lp-saisie). La session
+qui l'implémentera doit, dans la même session que le changement :
+
+1. **Consigner l'évolution dans le « Blog Direction »** (Hub de Direction,
+   https://complianceoptin.signial.net, document « Optall – Générateur
+   d'Opt-ins »). Source : `LAFRGL/optall-generateur-optins/fabrique.py`
+   (le HTML est un produit généré — ne jamais l'éditer directement).
+   Écrire dans le volet approprié (0 à 10), sinon créer un nouveau volet.
+   Corriger arbres de décision / diagrammes de Venn si l'évolution les rend
+   inexacts. Procédure : relire fabrique.py avant d'écrire,
+   `python3 fabrique.py`, copier le HTML dans
+   `LAFRGL/portail-compliance/contenu/`, déployer selon
+   `AJOUTER_UN_RAPPORT.md` depuis une copie isolée (seulement si les
+   fichiers du portail ne sont pas plus récents que le dernier déploiement).
+2. **Règles de déploiement signial.net** (suite incident du 23/09/2026) :
+   avant tout déploiement, comparer au déploiement en ligne fichier par
+   fichier ; publier depuis une copie tirée de `origin/main` ; pousser
+   aussitôt sur `main` ; jamais depuis `claude/lafourgale-ewd-barometre`.
+3. Référence complète : `CLAUDE.md` à la racine du dépôt Signial.net
+   (`origin/main`, commit 84b4a46 ou plus récent).
+
 ## 1. Emplacement & accès
 
 - **Emplacement précis** : dans l'application front **lp-saisie**
